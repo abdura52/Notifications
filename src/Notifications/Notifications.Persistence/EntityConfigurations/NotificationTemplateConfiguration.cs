@@ -8,7 +8,9 @@ public class NotificationTemplateConfiguration : IEntityTypeConfiguration<Notifi
 {
     public void Configure(EntityTypeBuilder<NotificationTemplate> builder)
     {
-        builder.Property(template => template.Content).HasMaxLength(256);
+        builder.HasIndex(template => template.NotificationType).IsUnique();
+
+        //builder.Property(template => template.Content).HasMaxLength(256);
 
         builder
             .HasDiscriminator(template => template.NotificationType)

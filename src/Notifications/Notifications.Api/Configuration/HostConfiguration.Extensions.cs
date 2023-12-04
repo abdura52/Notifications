@@ -4,6 +4,7 @@ using System.Reflection;
 using FluentValidation;
 using Notifications.Persistence.Repositories.Interfaces;
 using Notifications.Persistence.Repositories;
+using Notifications.Infrastructure.Settings;
 
 namespace Notifications.Api.Configuration;
 
@@ -25,6 +26,8 @@ public static partial class HostConfiguration
         // register persistence
         builder.Services.AddDbContext<NotificationDbContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("NotificationsDatabaseConnection")));
+
+        builder.Services.Configure<TemplateRenderingSettings>(builder.Configuration.GetSection(nameof(TemplateRenderingSettings)));
 
 
         // register brokers

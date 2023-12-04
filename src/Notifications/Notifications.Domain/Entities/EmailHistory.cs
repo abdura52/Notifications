@@ -1,18 +1,15 @@
-﻿using Notifications.Domain.Common.Models;
+﻿namespace Notifications.Domain.Entities;
 
-namespace Notifications.Domain.Entities;
-
-public class EmailHistory : IEntity
+public class EmailHistory : NotificationHistory
 {
-    public Guid Id { get; set; }
+    public EmailHistory()
+    {
+        NotificationType = Enums.NotificationType.Email;
+    }
 
-    public Guid SenderId { get; set; }
+    public string SenderEmailAddress { get; set; } = default!;
 
-    public Guid ReceiverId { get; set; }
-
-    public string Content { get; set; } = default!;
+    public string ReceiverEmailAddress { get; set; } = default!;
 
     public string Subject { get; set; } = default!;
-
-    public DateTime SendedTime { get; set; }
 }

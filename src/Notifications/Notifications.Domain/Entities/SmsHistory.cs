@@ -1,16 +1,13 @@
-﻿using Notifications.Domain.Common.Models;
+﻿namespace Notifications.Domain.Entities;
 
-namespace Notifications.Domain.Entities;
-
-public class SmsHistory : IEntity
+public class SmsHistory : NotificationHistory
 {
-    public Guid Id { get; set; }
+    public SmsHistory()
+    {
+        NotificationType = Enums.NotificationType.Sms;
+    }
 
-    public Guid SenderId { get; set; }
+    public string SenderPhoneNumber { get; set; }
 
-    public Guid ReceiverId { get; set; }
-
-    public string Content { get; set; } = default!;
-
-    public DateTime SendedTime { get; set; }
+    public string ReceiverPhoneNumber { get; set; }
 }

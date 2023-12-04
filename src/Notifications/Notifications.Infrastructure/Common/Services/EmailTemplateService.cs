@@ -4,6 +4,7 @@ using Notifications.Application.Common.Models.Querying;
 using Notifications.Application.Common.Notification.Services;
 using Notifications.Application.Common.Querying.Extensions;
 using Notifications.Domain.Entities;
+using Notifications.Domain.Enums;
 using Notifications.Persistence.Repositories.Interfaces;
 using System.Linq.Expressions;
 
@@ -43,4 +44,12 @@ public class EmailTemplateService : IEmailTemplateService
                 .ApplyPagination(paginationOptions)
                 .ToListAsync();
     }
+
+    public async ValueTask<EmailTemplate?> GetByTypeAsync(NotificationTemplateType templateType, CancellationToken token = default)
+    {
+        return await Get(template => template.NotificationTemplateType == templateType)
+            .SingleOrDefaultAsync();
+    }
+
+
 }
